@@ -1,6 +1,8 @@
 import pystray, os, sys, shutil
 from PIL import Image
 
+iconsPath = os.path.dirname(os.path.realpath(sys.argv[0]))+"\\images\\"
+
 class Menu(pystray.Menu):
 	PWD = "D:/Trabajo/GCloud/Regional/Web/"
 	proyectName = "new_proyect"
@@ -59,6 +61,5 @@ class Menu(pystray.Menu):
 class TrayIcon(pystray.Icon):
 	def __init__(self):
 		super().__init__("Systray ObejaNegra", title = "Obeja Negra", menu=Menu())
-		iconPath = os.path.dirname(os.path.realpath(sys.argv[0]))+"\\images\\"
-		self.icon = Image.open(iconPath+"favicon.ico")
+		self.icon = Image.open(iconsPath+"favicon.ico")
 		self.visible = True
