@@ -1,4 +1,4 @@
-import pystray, os, shutil
+import pystray, os, sys, shutil
 from PIL import Image
 
 class Menu(pystray.Menu):
@@ -49,5 +49,6 @@ class Menu(pystray.Menu):
 class TrayIcon(pystray.Icon):
 	def __init__(self):
 		super().__init__("Systray ObejaNegra", title = "Obeja Negra", menu=Menu())
-		self.icon = Image.open("images/favicon.ico")
+		iconPath = os.path.dirname(os.path.realpath(sys.argv[0]))+"\\images\\"
+		self.icon = Image.open(iconPath+"favicon.ico")
 		self.visible = True
