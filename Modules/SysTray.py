@@ -11,7 +11,7 @@ class Menu(pystray.Menu):
 
 	def getWebSubMenu(self):
 		phpDb = pystray.MenuItem("Without DataBase", self.cloneWebNoDb)
-		phpNDb = pystray.MenuItem("With DataBase", self.testing)
+		phpNDb = pystray.MenuItem("With DataBase", self.cloneWebDb)
 		return pystray.Menu(phpDb, phpNDb)
 		
 	def getMenuItems(self):
@@ -35,6 +35,16 @@ class Menu(pystray.Menu):
 	# For Testing propuse only
 	#
 	def testing(self, instance):	print(instance)
+
+	#
+	# Clone the template for de non database branch
+	#
+	def cloneWebDb(self, instance):
+		# self.proyectName = input("Name of the new proyecto: ")
+		print(self.getFullProyectPath())
+		os.system("git clone -b webWithDb git@gitlab.com:churritzu/work-templates.git "+ self.getFullProyectPath())
+		shutil.rmtree(self.getFullProyectPath() +".git/", ignore_errors=True)
+		os.system("code "+ self.getFullProyectPath())
 
 	#
 	# Clone the template for de non database branch
