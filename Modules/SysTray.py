@@ -1,29 +1,50 @@
-import pystray
+import pystray, os, shutil
 from PIL import Image
 
 class Menu(pystray.Menu):
+	PWD = "D:/Trabajo/GCloud/Regional/Web/"
+	proyectName = "new_proyect"
+
 	def __init__(self):
 		items = self.getMenuItems()
 		super().__init__(*items)
 
 	def getWebSubMenu(self):
-		phpDb = pystray.MenuItem("Without DataBase", self.printing)
-		phpNDb = pystray.MenuItem("With DataBase", self.printing)
+		phpDb = pystray.MenuItem("Without DataBase", self.cloneWebNoDb)
+		phpNDb = pystray.MenuItem("With DataBase", self.testing)
 		return pystray.Menu(phpDb, phpNDb)
 		
 	def getMenuItems(self):
 		exitOpt = pystray.MenuItem("Exit", self._close)
-		settingOpt = pystray.MenuItem("Settings", self.printing)
+		settingOpt = pystray.MenuItem("Settings", self.testing)
 		webOpt = pystray.MenuItem("Web", self.getWebSubMenu())
 
 		return [webOpt, self.SEPARATOR, settingOpt, self.SEPARATOR, exitOpt]
 
+	def getFullProyectPath(self): return self.PWD + self.proyectName+"/"
+
 	'''
 		Actions for de Menu
 	'''
+	# 
+	# Close the program
+	# 
 	def _close(self, instance):	instance.stop()
 
-	def printing(self, instance):	print(instance)
+	#
+	# For Testing propuse only
+	#
+	def testing(self, instance):	print(instance)
+
+	#
+	# Clone the template for de non database branch
+	#
+	def cloneWebNoDb(self, instance):
+		# self.proyectName = input("Name of the new proyecto: ")
+		print(self.getFullProyectPath())
+		os.system("git clone -b webWithOutDb git@gitlab.com:churritzu/work-templates.git "+ self.getFullProyectPath())
+		shutil.rmtree(self.getFullProyectPath() +".git/", ignore_errors=True)
+		os.system("code "+ self.getFullProyectPath())
 		
 class TrayIcon(pystray.Icon):
 	def __init__(self):
