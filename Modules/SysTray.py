@@ -25,22 +25,17 @@ class Menu(pystray.Menu):
 
 	def getFullProyectPath(self): return self.PWD + self.proyectName+"/"
 
-	'''
-		Actions for de Menu
-	'''
-	# 
+	#######################################################################
+	#	Actions for de Menu																									#
+	#######################################################################
+
 	# Close the program
-	# 
 	def _close(self, instance):	instance.stop()
 
-	#
 	# For Testing propuse only
-	#
 	def testing(self, instance):	print(instance)
 
-	#
 	# Clone the template for de non database branch
-	#
 	def cloneWebDb(self, instance):
 		# self.proyectName = input("Name of the new proyecto: ")
 		print(self.getFullProyectPath())
@@ -48,9 +43,7 @@ class Menu(pystray.Menu):
 		shutil.rmtree(self.getFullProyectPath() +".git/", ignore_errors=True)
 		os.system("code "+ self.getFullProyectPath())
 
-	#
 	# Clone the template for de non database branch
-	#
 	def cloneWebNoDb(self, instance):
 		# self.proyectName = input("Name of the new proyecto: ")
 		print(self.getFullProyectPath())
