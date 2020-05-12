@@ -11,8 +11,8 @@ class Menu(pystray.Menu):
 		super().__init__(*items)
 
 	def getWebSubmenu(self):
-		phpDb = pystray.MenuItem("Without DataBase", self._cloneWebNoDb)
-		phpNDb = pystray.MenuItem("With DataBase", self._cloneWebDb)
+		phpDb = pystray.MenuItem("Without DataBase", lambda: self._clone('webWithOutDb'))
+		phpNDb = pystray.MenuItem("With DataBase", lambda: self._clone('webWithDb'))
 		return pystray.Menu(phpDb, phpNDb)
 		
 	def getMenuItems(self):
@@ -35,8 +35,7 @@ class Menu(pystray.Menu):
 		os.system("python "+mainPath+"\\setting.py")
 
 	# Clone Options
-	def _cloneWebDb(self, instance): Clone("webWithDb").clone()
-	def _cloneWebNoDb(self, instance): Clone("webWithOutDb").clone()
+	def _clone(self, branch): Clone(branch).clone()
 
 	# For Testing propuse only
 	def _testing(self, instance):	print(instance)
