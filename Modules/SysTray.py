@@ -1,9 +1,9 @@
 import pystray, os, sys
 from PIL import Image
 from Modules.Clone import Clone
-from setting import SettingsApp
 
-iconsPath = os.path.dirname(os.path.realpath(sys.argv[0]))+"\\images\\"
+mainPath = os.path.dirname(os.path.realpath(sys.argv[0]))
+iconsPath = mainPath+"\\images\\"
 
 class Menu(pystray.Menu):
 	def __init__(self):
@@ -32,7 +32,7 @@ class Menu(pystray.Menu):
 	# Settings
 	def _settings(self, instance): 
 		print("Settings...")
-		SettingsApp().run()
+		os.system("python "+mainPath+"\\setting.py")
 
 	# Clone Options
 	def _cloneWebDb(self, instance): Clone("webWithDb").clone()

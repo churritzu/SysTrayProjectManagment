@@ -1,11 +1,12 @@
-from kivy.app import App
-from kivy.uix.label import Label
+from tkinter import Tk
+from tkinter import Label
 
-# kivy.require('1.11.1')
-
-class SettingsApp(App):
-	def build(self):
-		return Label(text="Hola Mundo")
+class SettingsApp(Tk):
+	def __init__(self):
+		super().__init__()
+		myLabel = Label(self, text="Hello Tkinter")
+		myLabel.pack()
 
 if __name__ == "__main__":
-		SettingsApp().run()
+	SettingsApp().mainloop()
+	# pass
